@@ -1,8 +1,5 @@
 import mongoose from "mongoose"
-import { UserModel } from "@/models/user.model"
-import { QuizModel } from "@/models/quiz.model"
-import { QuestionModel } from "@/models/question.model"
-import { ResultModel } from "@/models/result.model"
+
 
 type connectionObject = {
     isConnected?: number;
