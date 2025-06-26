@@ -4,7 +4,9 @@ import { UserModel } from '@/models/user.model'
 import bcrypt from 'bcrypt'
 import GoogleProvider from 'next-auth/providers/google'
 import { JWT } from 'next-auth/jwt'
-import { Account, Session, User } from 'next-auth'
+import {  Session, User } from 'next-auth'
+import { Account } from 'next-auth'
+
 
 
 
