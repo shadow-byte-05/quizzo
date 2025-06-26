@@ -10,10 +10,7 @@ declare module "next-auth" {
         password?: string;
     }
     interface Session {
-        id?: string
-        username: string
-        email: string
-        password?: string
+        user: User
     }
     interface Token {
         id?: string;

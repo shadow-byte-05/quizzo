@@ -3,6 +3,17 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { UserModel } from '@/models/user.model'
 import bcrypt from 'bcrypt'
 import GoogleProvider from 'next-auth/providers/google'
+import { NextResponse } from 'next/server'
+import { JWT } from 'next-auth/jwt'
+import { Account, Session, User } from 'next-auth'
+
+
+type user = {
+  email?:string,
+  username?:string,
+  password?:string
+
+}
 
 export const authOptions = {
   providers: [
@@ -16,7 +27,7 @@ export const authOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(credentials:any ): Promise<any> {
         await dbConnect()
 
         try {
@@ -28,7 +39,9 @@ export const authOptions = {
           })
 
           if (!user) {
-            throw new Error('User not found')
+            return NextResponse.json({
+              message: 'User Not Found',
+            })
           }
 
           const isPasswordValid = await bcrypt.compare(
@@ -36,7 +49,9 @@ export const authOptions = {
             user.password
           )
           if (!isPasswordValid) {
-            throw new Error('Invalid password')
+            return NextResponse.json({
+              message:"Invalid Password"
+            })
           }
 
           return {
@@ -45,14 +60,16 @@ export const authOptions = {
             email: user.email,
           }
         } catch (error) {
-          throw new Error('Authorization failed')
+          return NextResponse.json({
+            message: 'Authorization Failed',
+          })
         }
       },
     }),
   ],
 
   callbacks: {
-    async jwt({ token, user }: { token: any; user: any }) {
+    async jwt({ token, user }: { token: JWT; user: User }) {
       if (user) {
         token.id = user.id
         token.username = user.username
@@ -60,15 +77,15 @@ export const authOptions = {
       }
       return token
     },
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }: { session: Session; token: JWT }) {
       if (token) {
-        session.user.id = token.id
-        session.user.username = token.username
-        session.user.email = token.email
+        session.user.id = token.id as string
+        session.user.username = token.username as string
+        session.user.email = token.email as string
       }
       return session
     },
-    async signIn({ user, account }: any) {
+    async signIn({ user, account }: {user: User, account: Account}) {
       await dbConnect()
 
       if (account?.provider === 'google') {
