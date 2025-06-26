@@ -23,6 +23,13 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import { Loader2 } from 'lucide-react'
 
+interface RegisterFormData {
+  username: string,
+  email: string,
+  password: string
+  
+}
+
 const Page = () => {
   const router = useRouter()
 
@@ -37,7 +44,7 @@ const Page = () => {
     },
   })
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: RegisterFormData) => {
     setIsSubmitting(true)
     try {
       const res = await axios.post('/api/register', data)
