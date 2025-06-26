@@ -26,6 +26,7 @@ const Page = () => {
     signIn('google')
   }
   const handleSubmit = () => {
+    setIsLoading(true)
     signIn('credentials', {
       identifier: email,
       password: password,
@@ -121,7 +122,7 @@ const Page = () => {
             </Button>
 
             <div className="text-center text-sm text-black">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link
                 href="/sign-up"
                 className="text-teal-700-600 hover:underline font-medium"
