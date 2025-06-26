@@ -39,7 +39,7 @@ const Page = () => {
           const response = await axios.post('/api/getResultData', {
             email: email,
           })
-          console.log( response.data.data)
+          // console.log( response.data.data)
           setResult(response.data.data)
         } catch (err) {
          console.log("error",err)
