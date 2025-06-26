@@ -5,7 +5,11 @@ import { ResultModel } from "@/models/result.model";
 import { UserModel } from "@/models/user.model";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
-import { _success } from "zod/v4/core";
+
+type answer = {
+  question: number,
+  answer:string
+}
 
 type Questions = {
   question: string,
@@ -41,8 +45,8 @@ export async function POST(req:NextRequest){
         if (length) {
           for (let i = 0; i < length; i++) {
             const question: Questions = questions.questions[i]
-            const submitted = submittedAnswer.answers.find((a:any) => a.question === i)
-            console.log(question)
+            const submitted = submittedAnswer.answers.find((a:answer) => a.question === i)
+            // console.log(question)
             if (!submitted) {
               unattemptedQuestion.push(question._id)
               continue
@@ -67,7 +71,7 @@ export async function POST(req:NextRequest){
                 unattemptedQuestion:unattemptedQuestion,
                 toppersScore:'',
           })
-          const updatedUser = await UserModel.findByIdAndUpdate(
+          await UserModel.findByIdAndUpdate(
             user._id,
             { $addToSet: { quizResult: result._id } }, 
             { new: true } 

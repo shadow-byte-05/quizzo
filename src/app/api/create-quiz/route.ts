@@ -7,6 +7,9 @@ export async function POST(req:NextRequest) {
         const data = await req.json()
         return NextResponse.json(data)
     } catch (error) {
-        return new Error
+        console.log(error)
+        return NextResponse.json({
+            message:"error occured while connecting database"
+        })
 }
 }

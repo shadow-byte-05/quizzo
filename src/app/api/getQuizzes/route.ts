@@ -3,7 +3,7 @@ import { QuizModel } from "@/models/quiz.model";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET (req:NextRequest) {
+export async function GET () {
     await dbConnect()
     try {
         const quiz = await QuizModel.aggregate(
@@ -25,6 +25,7 @@ export async function GET (req:NextRequest) {
     })
         
     } catch (error) {
+        console.log(error)
         return NextResponse.json({
             message:"Data fetching problem"
         })

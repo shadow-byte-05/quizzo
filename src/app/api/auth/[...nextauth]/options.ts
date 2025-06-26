@@ -3,7 +3,6 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { UserModel } from '@/models/user.model'
 import bcrypt from 'bcrypt'
 import GoogleProvider from 'next-auth/providers/google'
-import { NextResponse } from 'next/server'
 import { JWT } from 'next-auth/jwt'
 import { Account, Session, User } from 'next-auth'
 

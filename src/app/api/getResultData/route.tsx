@@ -1,10 +1,15 @@
 import { dbConnect } from '@/lib/dbConnect'
 import { ResultModel } from '@/models/result.model'
-import { QuestionModel } from '@/models/question.model'
-import { QuizModel } from '@/models/quiz.model'
+import { QuestionModel} from '@/models/question.model'
+import '@/models/quiz.model'
 import { NextRequest, NextResponse } from 'next/server'
 import { UserModel } from '@/models/user.model'
-import mongoose from 'mongoose'
+import { Quiz } from '@/models/quiz.model'
+
+type question = {
+  question: number,
+  answer: string
+}
 
 export async function POST(req: NextRequest) {
   await dbConnect()
@@ -20,12 +25,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: 'No results found' }, { status: 404 })
     }
 
-    const quiz: any = result.quizId
+    const quiz: Quiz = result.quizId
     const questionDoc = await QuestionModel.findById(quiz.questionData)
     const questions = questionDoc?.questions || []
 
-    const questionDetails = result.solution.map((entry: any, index: any) => {
-      const original = questions[entry.question]
+    const questionDetails = result.solution.map((entry: question, index: number) => {
+      const original = questions[entry.question as number]
       return {
         id: index + 1,
         question: original?.question || 'N/A',

@@ -1,6 +1,6 @@
 import { dbConnect } from "@/lib/dbConnect"
 
-import { QuestionModel } from "@/models/question.model" 
+import { Question, QuestionModel } from "@/models/question.model" 
 
 import { QuizModel } from "@/models/quiz.model"
 import { NextRequest, NextResponse } from "next/server"
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   await dbConnect()
   const url = new URL(req.url)
   const id = url.pathname.split('/').pop()
-  console.log(id)
+  // console.log(id)
 
 //   if (!id || mongoose.Types.ObjectId.isValid(id)) {
 //     return NextResponse.json({
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     }
     const question = await QuestionModel.findById(quiz.questionData)
 
-    const questions = question?.questions.map((question: any) => {
+    const questions = question?.questions.map((question: Question) => {
       return { question: question.question, options: question.options }
     })
     
@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
     const question = await QuestionModel.findById(quiz.questionData)
 
 
-    const questions = question?.questions.map((question: any) => {
+    const questions = question?.questions.map((question: Question) => {
       return { question: question.question, options: question.options }
     })
 

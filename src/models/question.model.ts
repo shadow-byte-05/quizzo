@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose"
 
- type Question = {
+ export type Question = {
     question: string,
     options: string[],
     answer: string,

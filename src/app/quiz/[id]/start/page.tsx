@@ -37,21 +37,9 @@ const Page = () => {
       router.replace(`/quiz/${quizId}/question/1`)
     } catch (error) {
       console.error('Failed to fetch quiz:', error)
-    }
   }
 
-  const handleClick = (index, i) => {
-    console.log('click')
-    setResponse((prev) => {
-      const newResponse = [...prev]
-      const existingResponse = newResponse.find((r) => r.question === index)
-      if (!existingResponse) {
-        newResponse.push({ question: index, answer: i })
-      } else {
-        existingResponse.answer = i
-      }
-      return newResponse
-    })
+ 
     // console.log(response)
   }
 

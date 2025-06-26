@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
-    const newUser = await UserModel.create({
+    await UserModel.create({
       firstName: firstName,
       lastName: lastName,
       username: username,
