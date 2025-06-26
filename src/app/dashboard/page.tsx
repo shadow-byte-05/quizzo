@@ -55,7 +55,7 @@ const Page = () => {
   for (let i = 1; i < recentResults.length; i++) {
     sum = recentResults[i].score
   }
-  const average = sum / recentResults.length
+  const average = Math.round(sum / recentResults.length)
 
   const handleSignOut = () => {
     signOut()

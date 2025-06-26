@@ -2,6 +2,7 @@
 
 import { QuizProvider } from '@/context/quizContext'
 import axios from 'axios'
+import { Loader2 } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -39,7 +40,13 @@ const Layout = ({ children }: Props) => {
     fetchData()
   }, [quizId])
 
-  if (loading) return <div>Loading quiz...</div>
+  if (loading) return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <Loader2 className='w-[100] h-auto animate-spin'/>
+      </div>
+    </div>
+  )
 
   return <QuizProvider data={quizData}>{children}</QuizProvider>
 }

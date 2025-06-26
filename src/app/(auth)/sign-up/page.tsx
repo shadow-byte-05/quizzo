@@ -132,7 +132,7 @@ const Page = () => {
                 />
                 <Button className="" type="submit" disabled={isSubmitting}>
                   {isSubmitting ? (
-                    <Loader2 className="animate-spin" />
+                    <Loader2 className="animate-spin text-gray-50" />
                   ) : (
                     'Register'
                   )}

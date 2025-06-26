@@ -19,7 +19,7 @@ const Page = () => {
             <h2 className="text-2xl font-bold bg-white text-indigo-900 mb-4">
               Processing Your Submission
             </h2>
-            <p className="text-secondary">
+            <p className="text-indigo-900">
               Please wait while we calculate your results...
             </p>
           </CardContent>
