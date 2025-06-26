@@ -8,12 +8,6 @@ import { JWT } from 'next-auth/jwt'
 import { Account, Session, User } from 'next-auth'
 
 
-type user = {
-  email?:string,
-  username?:string,
-  password?:string
-
-}
 
 export const authOptions = {
   providers: [
@@ -27,7 +21,9 @@ export const authOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials: any): Promise<any> {
+      async authorize(
+        credentials: Record<'email' | 'password', string> | undefined
+      ): Promise<User | null> {
         await dbConnect()
 
         try {
@@ -39,9 +35,7 @@ export const authOptions = {
           })
 
           if (!user) {
-            return NextResponse.json({
-              message: 'User Not Found',
-            })
+            return null
           }
 
           const isPasswordValid = await bcrypt.compare(
@@ -49,9 +43,7 @@ export const authOptions = {
             user.password
           )
           if (!isPasswordValid) {
-            return NextResponse.json({
-              message: 'Invalid Password',
-            })
+            return null
           }
 
           return {
@@ -60,10 +52,8 @@ export const authOptions = {
             email: user.email,
           }
         } catch (error) {
-          return NextResponse.json({
-            message: 'Authorization Failed',
-            data: error,
-          })
+          console.log(error)
+          return null
         }
       },
     }),
@@ -86,13 +76,7 @@ export const authOptions = {
       }
       return session
     },
-    async signIn({
-      user,
-      account,
-    }: {
-      user: User 
-      account: Account | null
-    }) {
+    async signIn({ user, account }: { user: User; account: Account | null }) {
       await dbConnect()
 
       if (account?.provider === 'google') {
