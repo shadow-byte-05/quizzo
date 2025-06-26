@@ -24,13 +24,18 @@ export async function POST(req: NextRequest) {
       })
       .lean()
 
-
-    const quizzes = user?.quizResult?.map((result: any) => ({
-      name: result.quizId?.name,
-      score: result.score,
-      date:new Date(result.createdAt).toLocaleDateString(),
-      total:result.quizId.totalMarks
-    }))
+      if (Array.isArray(user)){
+        return NextResponse.json({
+          message: 'user is not an array',
+          
+        })
+      }
+      const quizzes = user?.quizResult?.map((result: any) => ({
+        name: result.quizId?.name,
+        score: result.score,
+        date: new Date(result.createdAt).toLocaleDateString(),
+        total: result.quizId.totalMarks,
+      }))
 
     return NextResponse.json({
       message: 'Data fetched successfully',

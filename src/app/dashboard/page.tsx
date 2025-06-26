@@ -10,13 +10,20 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import axios from 'axios'
-import { Badge, BarChart3, BookOpen, Clock, Trophy, Users } from 'lucide-react'
+import { BarChart3,  Clock, Trophy,  } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+type recentResults = {
+  date: string,
+  name:string,
+  score:number,
+  total:number,
+}
+
 const page = () => {
-  const [recentResults, setRecentResults] = useState([])
+  const [recentResults, setRecentResults] = useState<recentResults[]>([])
   const [quizData, setQuizData] = useState([])
   const { data: session } = useSession()
   // console.log(session?.user.id)
@@ -28,7 +35,7 @@ const page = () => {
       const Results = await axios.post('/api/getResults', {
         email: session?.user?.email,
       })
-      console.log(quizzes.data.data)
+      console.log(Results.data.data)
       setRecentResults(Results.data.data)
       setQuizData(quizzes.data.data)
     }

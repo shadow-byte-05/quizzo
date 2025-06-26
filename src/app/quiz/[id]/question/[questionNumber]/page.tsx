@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button'
 import { useAnswers } from '@/context/answerContext'
 import { useQuiz } from '@/context/quizContext'
 import axios from 'axios'
-import { Badge, ChevronLeft, ChevronRight, Flag } from 'lucide-react'
+import {  ChevronLeft, ChevronRight, Flag } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import { useParams, useRouter } from 'next/navigation'
 
 import { useEffect, useState } from 'react'
-import { useSonner } from 'sonner'
+
 
 const Page = () => {
   const router = useRouter()

@@ -3,15 +3,21 @@ import { QuestionModel } from "@/models/question.model";
 import { QuizModel } from "@/models/quiz.model";
 import { ResultModel } from "@/models/result.model";
 import { UserModel } from "@/models/user.model";
+import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
-import { SuiteContext } from "node:test";
 import { _success } from "zod/v4/core";
 
+type Questions = {
+  question: string,
+  options: string[],
+  answer: string,
+  _id?: mongoose.Types.ObjectId | string
+}
 
 
 export async function POST(req:NextRequest){
     const submittedAnswer = await req.json()
-    console.log(submittedAnswer)
+    // console.log(submittedAnswer)
     await dbConnect()
     try {
         const user = await UserModel.findOne({email:submittedAnswer.userEmail})
@@ -34,7 +40,7 @@ export async function POST(req:NextRequest){
 
         if (length) {
           for (let i = 0; i < length; i++) {
-            const question = questions.questions[i]
+            const question: Questions = questions.questions[i]
             const submitted = submittedAnswer.answers.find((a:any) => a.question === i)
             console.log(question)
             if (!submitted) {

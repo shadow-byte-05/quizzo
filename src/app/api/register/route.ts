@@ -1,7 +1,6 @@
 import { dbConnect } from "@/lib/dbConnect";
 import { UserModel } from "@/models/user.model";
-import { ApiResponse } from "@/types/ApiResponse";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest,  } from "next/server";
 import bcrypt from 'bcrypt'
 
 

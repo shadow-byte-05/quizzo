@@ -3,10 +3,6 @@ import { dbConnect } from "@/lib/dbConnect"
 import { QuestionModel } from "@/models/question.model" 
 
 import { QuizModel } from "@/models/quiz.model"
-
-import mongoose from "mongoose"
-import { NextApiRequest, NextApiResponse } from "next"
-import { useParams } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
 
 

@@ -12,8 +12,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { signIn } from 'next-auth/react'
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Loader2, LoaderCircle } from 'lucide-react'
+
+import { Loader2} from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 

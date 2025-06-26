@@ -10,13 +10,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { useQuiz } from '@/context/quizContext'
-import axios from 'axios'
+
 import { Award, FileText, Loader2 } from 'lucide-react'
 
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 
 const Page = () => {
   const { name, description, totalMarks, questions } = useQuiz()
@@ -24,11 +24,11 @@ const Page = () => {
   const router = useRouter()
   const params = useParams()
   const quizId = params?.id
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
   const [isStarting, setIsStarting] = useState(false)
 
-  const numberOfQuestion = totalMarks / 4
+
 
   const handleStartQuiz = async () => {
     console.log('clicked')

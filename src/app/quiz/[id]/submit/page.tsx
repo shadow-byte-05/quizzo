@@ -16,7 +16,7 @@ const page = () => {
         <Card className="shadow-xl border-teal-700-300">
           <CardContent className="p-12">
             <div className="animate-spin w-16 h-16 border-4 border-teal-700 border-t-transparent rounded-full mx-auto mb-6"></div>
-            <h2 className="text-2xl font-bold bg-indigo-900 mb-4">
+            <h2 className="text-2xl font-bold bg-white text-indigo-900 mb-4">
               Processing Your Submission
             </h2>
             <p className="text-secondary">
