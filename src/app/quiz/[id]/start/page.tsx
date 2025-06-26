@@ -13,13 +13,12 @@ import { useQuiz } from '@/context/quizContext'
 
 import { Award, FileText, Loader2 } from 'lucide-react'
 
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import React, {  useState } from 'react'
 
 const Page = () => {
-  const { name, description, totalMarks, questions } = useQuiz()
+  const { name, description, totalMarks } = useQuiz()
 
   const router = useRouter()
   const params = useParams()

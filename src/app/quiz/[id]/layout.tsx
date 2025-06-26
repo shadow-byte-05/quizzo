@@ -2,7 +2,6 @@
 
 import { QuizProvider } from '@/context/quizContext'
 import axios from 'axios'
-import { useSession } from 'next-auth/react'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -21,7 +20,7 @@ const Layout = ({ children }: Props) => {
 
   const params = useParams()
   const quizId = params?.id
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
   useEffect(() => {
     const fetchData = async () => {

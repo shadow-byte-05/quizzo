@@ -2,19 +2,19 @@ import mongoose, { Schema } from "mongoose"
 
 
 export type Response = {
-    question:Number,
-    answer:String
+    question:number,
+    answer:string
 }
 
 export interface Result extends Document{
     quizId:mongoose.Types.ObjectId,
     userId:mongoose.Types.ObjectId,
     solution: Response[]
-    score:Number,
+    score:number,
     correctQuestion:mongoose.Types.ObjectId[],
     incorrectQuestion:mongoose.Types.ObjectId[],
     unattemptedQuestion:mongoose.Types.ObjectId[],
-    toppersScore:Number,
+    toppersScore:number,
     createdAt:Date,
     updatedAt:Date,
 }

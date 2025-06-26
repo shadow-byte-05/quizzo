@@ -21,6 +21,13 @@ type recentResults = {
   score:number,
   total:number,
 }
+type quiz = {
+  _id:string,
+  name:string,
+  description:string,
+  totalMarks:number
+
+}
 
 const Page = () => {
   const [recentResults, setRecentResults] = useState<recentResults[]>([])
@@ -35,18 +42,18 @@ const Page = () => {
       const Results = await axios.post('/api/getResults', {
         email: session?.user?.email,
       })
-      console.log(Results.data.data)
+      // console.log(Results.data.data)
       setRecentResults(Results.data.data)
       setQuizData(quizzes.data.data)
     }
     fetchData()
   }, [session])
-  useEffect(() => {
-    console.log(quizData)
-  }, [quizData])
+  // useEffect(() => {
+  //   console.log(quizData)
+  // }, [quizData])
   let sum = 0
   for (let i = 1; i < recentResults.length; i++) {
-    const sum = recentResults[i].score
+    sum = recentResults[i].score
   }
   const average = sum / recentResults.length
 
@@ -214,7 +221,7 @@ const Page = () => {
               <CardDescription>Quizzes you can take</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {quizData.map((quiz: any, i) => (
+              {quizData.map((quiz: quiz, i) => (
                 <div
                   key={i}
                   className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
@@ -246,7 +253,7 @@ const Page = () => {
               <CardDescription>Your latest quiz scores</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {recentResults.map((result: any, index) => (
+              {recentResults.map((result: recentResults, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-between p-4 bg-gray-50 rounded-lg" 

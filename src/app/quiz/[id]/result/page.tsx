@@ -10,6 +10,14 @@ import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+interface question {
+  id:number,
+  question:string,
+  selectedAnswer:string,
+  correctAnswer:string,
+  isCorrect: boolean
+}
+
 const Page = () => {
     const {data:session} = useSession()
     const email = session?.user?.email
@@ -33,14 +41,12 @@ const Page = () => {
           })
           console.log( response.data.data)
           setResult(response.data.data)
-        } catch (err: any) {
-         console.log("error")
+        } catch (err) {
+         console.log("error",err)
         }
       }
 
-      if (email) {
-        fetchResult()
-      }
+      fetchResult()
     }, [session])
 
     const handleSignOut = () => {
@@ -113,7 +119,7 @@ const Page = () => {
             Question-by-Question Review
           </h2>
 
-          {result.questions?.map((question: any, index: any) => (
+          {result.questions?.map((question: question, index: number) => (
             <Card key={question.id} className="shadow-lg border-teal/20">
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between">

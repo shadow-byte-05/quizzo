@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose"
-import { QuestionModel } from "./question.model"
+
 
 
 export interface Quiz extends Document {

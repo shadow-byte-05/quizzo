@@ -1,6 +1,6 @@
 import { dbConnect } from "@/lib/dbConnect";
 import { QuizModel } from "@/models/quiz.model";
-import { NextRequest, NextResponse } from "next/server";
+import {  NextResponse } from "next/server";
 
 
 export async function GET () {

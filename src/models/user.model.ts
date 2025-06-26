@@ -1,5 +1,5 @@
 import mongoose, {Schema} from "mongoose"
-import { ResultModel } from "./result.model"
+
 
 
 export interface User extends Document {

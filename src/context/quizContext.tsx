@@ -10,7 +10,7 @@ type QuizContextType = {
   name: string,
   description: string,
   totalMarks: number,
-  questions:question[]
+  questions?:question[]
 }
 type FinalQuizContextType = QuizContextType & {
   setQuizData: React.Dispatch<React.SetStateAction<QuizContextType>>
