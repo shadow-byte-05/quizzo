@@ -23,7 +23,7 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import { Loader2 } from 'lucide-react'
 
-const page = () => {
+const Page = () => {
   const router = useRouter()
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -186,4 +186,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

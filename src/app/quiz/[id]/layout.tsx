@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const QuizLayout = ({ children }: Props) => {
+const Layout = ({ children }: Props) => {
   const [loading, setLoading] = useState(true)
   const [quizData, setQuizData] = useState({
     name: '',
@@ -45,4 +45,4 @@ const QuizLayout = ({ children }: Props) => {
   return <QuizProvider data={quizData}>{children}</QuizProvider>
 }
 
-export default QuizLayout
+export default Layout

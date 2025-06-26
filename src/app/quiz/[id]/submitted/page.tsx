@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
   const { data: session } = useSession()
   console.log(session)
   const {id} = useParams()
@@ -66,4 +66,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

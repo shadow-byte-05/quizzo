@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { signOut } from 'next-auth/react'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
   const handleSignOut = () => {
     signOut()
   }
@@ -29,4 +29,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

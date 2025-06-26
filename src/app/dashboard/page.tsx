@@ -22,7 +22,7 @@ type recentResults = {
   total:number,
 }
 
-const page = () => {
+const Page = () => {
   const [recentResults, setRecentResults] = useState<recentResults[]>([])
   const [quizData, setQuizData] = useState([])
   const { data: session } = useSession()
@@ -278,4 +278,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

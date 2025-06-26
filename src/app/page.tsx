@@ -5,7 +5,7 @@ import { CheckCircle, Users, Trophy, Clock } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
 
-const Landing = () => {
+const Page = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-lime/20 to-teal-600/20">
       <Navbar isHomePage={true} />
@@ -118,4 +118,4 @@ const Landing = () => {
   )
 }
 
-export default Landing
+export default Page

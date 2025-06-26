@@ -17,7 +17,7 @@ import { Loader2} from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 
-const page = () => {
+const Page = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -136,4 +136,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

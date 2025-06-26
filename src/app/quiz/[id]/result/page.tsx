@@ -10,7 +10,7 @@ import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
-const page = () => {
+const Page = () => {
     const {data:session} = useSession()
     const email = session?.user?.email
     const [result, setResult] = useState({
@@ -176,4 +176,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
