@@ -27,7 +27,7 @@ export const authOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials:any ): Promise<any> {
+      async authorize(credentials: any): Promise<any> {
         await dbConnect()
 
         try {
@@ -50,7 +50,7 @@ export const authOptions = {
           )
           if (!isPasswordValid) {
             return NextResponse.json({
-              message:"Invalid Password"
+              message: 'Invalid Password',
             })
           }
 
@@ -62,6 +62,7 @@ export const authOptions = {
         } catch (error) {
           return NextResponse.json({
             message: 'Authorization Failed',
+            data: error,
           })
         }
       },
@@ -85,7 +86,13 @@ export const authOptions = {
       }
       return session
     },
-    async signIn({ user, account }: {user: User, account: Account}) {
+    async signIn({
+      user,
+      account,
+    }: {
+      user: User 
+      account: Account | null
+    }) {
       await dbConnect()
 
       if (account?.provider === 'google') {
@@ -107,7 +114,7 @@ export const authOptions = {
   },
 
   session: {
-    strategy: "jwt" as const,
+    strategy: 'jwt' as const,
   },
 
   pages: {
