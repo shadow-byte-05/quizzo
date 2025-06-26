@@ -17,7 +17,7 @@ const Page = () => {
   const router = useRouter()
   const { data: session } = useSession()
   const { id, questionNumber } = useParams()
-  const { questions, totalMarks } = useQuiz()
+  const { questions = [], totalMarks } = useQuiz()
   const { answers, setAnswers } = useAnswers()
 
   const [selectedAnswer, setSelectedAnswer] = useState('')
