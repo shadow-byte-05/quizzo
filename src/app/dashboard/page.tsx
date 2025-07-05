@@ -30,7 +30,7 @@ type quiz = {
 }
 
 const Page = () => {
-
+  const [average,setAverage] = useState(0)
   const [recentResults, setRecentResults] = useState<recentResults[]>([])
   const [quizData, setQuizData] = useState([])
   const [myQuizzes,setMyQuizzes] = useState(0)
@@ -55,10 +55,16 @@ const Page = () => {
   //   console.log(quizData)
   // }, [quizData])
   let sum = 0
-  for (let i = 1; i < recentResults.length; i++) {
-    sum = recentResults[i].score
-  }
-  const average = Math.round(sum / recentResults.length)
+  useEffect(()=>{
+    if (recentResults) {
+      for (let i = 1; i < recentResults.length; i++) {
+        sum = recentResults[i].score
+      }
+      setAverage(Math.round(sum / recentResults.length))
+      console.log(sum / recentResults.length)
+    }
+  },[])
+  
 
   const handleSignOut = () => {
     signOut()
