@@ -216,24 +216,29 @@ const Page = () => {
           onOpenChange={setShowGenerator}
           modal={true}
         >
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl px-4 sm:px-6 py-6">
             <DialogHeader>
-              <DialogTitle className="text-indigo-900 flex items-center">
-              <Wand2 className="h-5 w-5 mr-2" />
-              AI Quiz Generator
+              <DialogTitle className="text-indigo-900 flex items-center text-lg sm:text-xl">
+                <Wand2 className="h-5 w-5 mr-2" />
+                AI Quiz Generator
               </DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you&apos;re
-                done.
+              <DialogDescription className="text-sm sm:text-base text-gray-500 mt-1">
+                Generate quizzes with ease. Click cancel to exit.
               </DialogDescription>
             </DialogHeader>
-            <QuizGenerator
-              userEmail={userEmail}
-              onQuestionsGenerated={handleGeneratedQuestions}
-            />
-            <DialogFooter>
+
+            <div className="mt-4">
+              <QuizGenerator
+                userEmail={userEmail}
+                onQuestionsGenerated={handleGeneratedQuestions}
+              />
+            </div>
+
+            <DialogFooter className="mt-6">
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline" className="w-full sm:w-auto">
+                  Cancel
+                </Button>
               </DialogClose>
             </DialogFooter>
           </DialogContent>
@@ -242,27 +247,30 @@ const Page = () => {
         {/* Questions Section */}
         <Card className="border-teal-100/10 mb-8">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              {/* Left Section */}
               <div>
-                <CardTitle className="text-indigo-900">
+                <CardTitle className="text-indigo-900 text-lg sm:text-xl">
                   Questions ({quizData.questions.length})
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-sm sm:text-base">
                   Add and manage your quiz questions
                 </CardDescription>
               </div>
-              <div className="flex space-x-2">
+
+              {/* Right Button Group */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-2 w-full sm:w-auto">
                 <Button
                   onClick={() => setShowGenerator(!showGenerator)}
                   variant="outline"
-                  className="border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white"
+                  className="border-teal-700 text-teal-700 hover:bg-teal-700 hover:text-white w-full sm:w-auto"
                 >
                   <Sparkles className="h-4 w-4 mr-2" />
                   {showGenerator ? 'Hide Generator' : 'AI Generator'}
                 </Button>
                 <Button
                   onClick={addQuestion}
-                  className="bg-indigo-900 hover:bg-indigo-900/90 text-white"
+                  className="bg-indigo-900 hover:bg-indigo-900/90 text-white w-full sm:w-auto"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Question
@@ -270,6 +278,7 @@ const Page = () => {
               </div>
             </div>
           </CardHeader>
+
           <CardContent>
             {quizData.questions.length === 0 ? (
               <div className="text-center py-12 text-gray-400">
@@ -324,10 +333,11 @@ const Page = () => {
           </Button>
 
           <div className="flex space-x-4">
-
             <Button
               onClick={handleSaveQuiz}
-              disabled={ !quizData.title || !quizData.description || isSubmitting}
+              disabled={
+                !quizData.title || !quizData.description || isSubmitting
+              }
               className="bg-indigo-900 hover:bg-indigo-700 text-white flex items-center space-x-2"
             >
               {isSubmitting ? (
