@@ -5,11 +5,19 @@ import '@/models/user.model'
 import '@/models/quiz.model'
 import '@/models/result.model'
 import { NextRequest, NextResponse } from 'next/server'
+import path from 'path'
+import mongoose from 'mongoose'
 
 
 interface Quiz {
-  name: string
-  totalMarks: number
+  _id?:mongoose.Types.ObjectId,
+  name: string,
+  description?:string,
+  questionData?:mongoose.Types.ObjectId,
+  participants?:mongoose.Types.ObjectId[],
+  totalMarks: number,
+  createdAt?:Date,
+  updatedAt?:Date
 }
 
 interface QuizResult {
@@ -33,6 +41,8 @@ export async function POST(req: NextRequest) {
       .populate({
         path: 'quizResult',
         populate: { path: 'quizId' },
+      }).populate({
+        path:'quizCreated',
       })
       .lean()
 
@@ -43,7 +53,10 @@ export async function POST(req: NextRequest) {
         })
       }
       // console.log(user)
+      const MyQuizzes =  user?.quizCreated.length
+
       const quizzes = user?.quizResult?.map((result: QuizResult) => ({
+        id:result.quizId._id,
         name: result.quizId?.name,
         score: result.score,
         date: new Date(result.createdAt).toLocaleDateString(),
@@ -54,6 +67,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       message: 'Data fetched successfully',
       data: quizzes,
+      myQuizzes: MyQuizzes
     })
   } catch (error) {
     console.error(error)

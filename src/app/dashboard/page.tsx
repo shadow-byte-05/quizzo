@@ -10,9 +10,10 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import axios from 'axios'
-import { BarChart3,  Clock, Trophy,  } from 'lucide-react'
+import { BarChart3,  BookOpen,  Clock, Plus, Trophy,  } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 type recentResults = {
@@ -30,8 +31,11 @@ type quiz = {
 }
 
 const Page = () => {
+
+  const router = useRouter()
   const [recentResults, setRecentResults] = useState<recentResults[]>([])
   const [quizData, setQuizData] = useState([])
+  const [myQuizzes,setMyQuizzes] = useState(0)
   const { data: session } = useSession()
   // console.log(session?.user.id)
   useEffect(() => {
@@ -45,6 +49,7 @@ const Page = () => {
       // console.log(Results.data.data)
       setRecentResults(Results.data.data)
       setQuizData(quizzes.data.data)
+      setMyQuizzes(Results.data.myQuizzes)
     }
     fetchData()
   }, [session])
@@ -67,7 +72,7 @@ const Page = () => {
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-indigo-900-900 mb-2">
+          <h1 className="text-3xl font-bold text-indigo-900 mb-2">
             Welcome back, {session?.user?.name}!
           </h1>
           <p className="text-gray-800">
@@ -77,137 +82,80 @@ const Page = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          {/* <Card className="border-teal-700-600/20 hover:shadow-lg transition-shadow">
+          <Card className="border-teal-700 hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-800">
                     Quizzes Created
                   </p>
-                  <p className="text-2xl font-bold text-indigo-900-900">
-                    {myQuizzes.length}
+                  <p className="text-2xl font-bold text-indigo-900">
+                    {myQuizzes}
                   </p>
                 </div>
-                <BookOpen className="h-8 w-8 text-teal-700-600" />
+                <BookOpen className="h-8 w-8 text-teal-700" />
               </div>
             </CardContent>
-          </Card> */}
+          </Card>
 
-          <Card className="border-teal-700-600/20 hover:shadow-lg transition-shadow">
+          <Card className="border-teal-700 hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-800">
                     Quizzes Given
                   </p>
-                  <p className="text-2xl font-bold text-indigo-900-900">
+                  <p className="text-2xl font-bold text-indigo-900">
                     {recentResults.length}
                   </p>
                 </div>
-                <Trophy className="h-8 w-8 text-teal-700-600" />
+                <Trophy className="h-8 w-8 text-teal-700" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-teal-700-600/20 hover:shadow-lg transition-shadow">
+          <Card className="border-teal-700 hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-800">
                     Average Score
                   </p>
-                  <p className="text-2xl font-bold text-indigo-900-900">
-                    {average}%
+                  <p className="text-2xl font-bold text-indigo-900">
+                    {average || 0}%
                   </p>
                 </div>
-                <BarChart3 className="h-8 w-8 text-teal-700-600" />
+                <BarChart3 className="h-8 w-8 text-teal-700" />
               </div>
             </CardContent>
           </Card>
-
-          {/* <Card className="border-teal-700-600/20 hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-800">
-                    Total Participants
-                  </p>
-                  <p className="text-2xl font-bold text-indigo-900-900">73</p>
-                </div>
-                <Users className="h-8 w-8 text-teal-700-600" />
-              </div>
-            </CardContent>
-          </Card> */}
         </div>
 
         {/* Main Content Grid */}
-        {/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-8"> */}
-        {/* Create Quiz Section */}
-        {/* <div className="lg:col-span-1">
-            <Card className="border-indigo-900/20 hover:shadow-xl transition-all duration-300">
-              <CardHeader className="text-center">
-                <CardTitle className="text-indigo-900-900">Create New Quiz</CardTitle>
-                <CardDescription>
-                  Start building an engaging quiz for your audience
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-center">
-                <Link to="/quiz/create">
-                  <Button
-                    size="lg"
-                    className="bg-indigo-900 hover:bg-indigo-900/90 text-white w-full mb-4"
-                  >
-                    <Plus className="mr-2 h-5 w-5" />
-                    Create Quiz
-                  </Button>
-                </Link>
-                <p className="text-sm text-gray-800">
-                  Build interactive quizzes with multiple choice questions
-                </p>
-              </CardContent>
-            </Card>
-          </div> */}
-
-        {/* My Quizzes */}
-        {/* <div className="lg:col-span-2">
-            <Card className="border-teal-700-600/20">
-              <CardHeader>
-                <CardTitle className="text-indigo-900-900 flex items-center">
-                  <BookOpen className="mr-2 h-5 w-5" />
-                  My Quizzes
-                </CardTitle>
-                <CardDescription>Quizzes you've created</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {quizData.map((quiz: any) => (
-                  <div
-                    key={quiz.id}
-                    className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    <div>
-                      <h3 className="font-semibold text-indigo-900-900">
-                        {quiz.id}
-                      </h3>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Link href={`/quiz/${quiz.id}/edit`}>
-                        <Button variant="outline" size="sm">
-                          Edit
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-                {myQuizzes.length === 0 && (
-                  <p className="text-center text-gray-800 py-8">
-                    No quizzes created yet. Create your first quiz to get
-                    started!
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </div> */}
+        <div className="max-w-md mx-auto">
+          <Card className="border-indigo-900/20 hover:shadow-xl transition-all duration-300">
+            <CardHeader className="text-center">
+              <CardTitle className="text-indigo-900">Create New Quiz</CardTitle>
+              <CardDescription>
+                Start building an engaging quiz for your audience
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-center">
+              <Link href="/create-quiz">
+                <Button
+                  size="lg"
+                  className="bg-indigo-900 hover:bg-indigo-900/90 text-white w-full mb-4"
+                >
+                  <Plus className="mr-2 h-5 w-5" />
+                  Create Quiz
+                </Button>
+              </Link>
+              <p className="text-sm text-gray-800">
+                Build interactive quizzes with multiple choice questions
+              </p>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Bottom Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
@@ -256,10 +204,10 @@ const Page = () => {
               {recentResults.map((result: recentResults, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg" 
+                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 "
                 >
                   <div>
-                    <h3 className="font-semibold text-indigo-900-900">
+                    <h3 className="font-semibold text-indigo-900-900 cursor-pointer ">
                       {result.name}
                     </h3>
                     <div className="flex items-center space-x-2 text-sm text-gray-800 mt-1">

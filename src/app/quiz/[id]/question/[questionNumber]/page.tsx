@@ -17,13 +17,13 @@ const Page = () => {
   const router = useRouter()
   const { data: session } = useSession()
   const { id, questionNumber } = useParams()
-  const { questions = [], totalMarks } = useQuiz()
+  const { questions = [], totalMarks,name } = useQuiz()
   const { answers, setAnswers } = useAnswers()
 
   const [selectedAnswer, setSelectedAnswer] = useState('')
 
   const currentQuestion = Number(questionNumber)
-  const totalQuestions = totalMarks / 4
+  const totalQuestions = questions.length
 
   useEffect(() => {
     const savedAnswer = answers[currentQuestion - 1]?.answer || ''
@@ -98,7 +98,7 @@ const Page = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold text-indigo-900">
-                JavaScript Fundamentals Quiz
+                {name}
               </h1>
               &nbsp; Question {currentQuestion} of {totalQuestions}
             </div>

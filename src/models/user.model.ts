@@ -10,6 +10,7 @@ export interface User extends Document {
     provider: 'credentials' | 'google'
     quizParticipated: mongoose.Types.ObjectId[],
     quizResult: mongoose.Types.ObjectId[],
+    quizCreated:mongoose.Types.ObjectId[]
     createdAt: Date
     updatedAt: Date
 }
@@ -46,6 +47,12 @@ const userSchema = new Schema<User>(
         required: true,
         },
         quizParticipated:[
+            {
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'Quiz'
+            }
+        ],
+        quizCreated:[
             {
                 type:mongoose.Schema.Types.ObjectId,
                 ref:'Quiz'
