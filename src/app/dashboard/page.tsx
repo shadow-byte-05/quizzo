@@ -13,7 +13,6 @@ import axios from 'axios'
 import { BarChart3,  BookOpen,  Clock, Plus, Trophy,  } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 type recentResults = {
@@ -32,7 +31,6 @@ type quiz = {
 
 const Page = () => {
 
-  const router = useRouter()
   const [recentResults, setRecentResults] = useState<recentResults[]>([])
   const [quizData, setQuizData] = useState([])
   const [myQuizzes,setMyQuizzes] = useState(0)

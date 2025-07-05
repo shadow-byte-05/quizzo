@@ -5,7 +5,7 @@ import '@/models/user.model'
 import '@/models/quiz.model'
 import '@/models/result.model'
 import { NextRequest, NextResponse } from 'next/server'
-import path from 'path'
+
 import mongoose from 'mongoose'
 
 

@@ -17,7 +17,7 @@ const Page = () => {
   const router = useRouter()
   const { data: session } = useSession()
   const { id, questionNumber } = useParams()
-  const { questions = [], totalMarks,name } = useQuiz()
+  const { questions = [],name } = useQuiz()
   const { answers, setAnswers } = useAnswers()
 
   const [selectedAnswer, setSelectedAnswer] = useState('')
@@ -68,7 +68,7 @@ const Page = () => {
       })),
     }
 
-    console.log('Submitting:', submissionData)
+    // console.log('Submitting:', submissionData)
 
     try {
       router.push(`/quiz/${id}/submit`)

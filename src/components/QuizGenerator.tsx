@@ -1,5 +1,5 @@
 import { Loader2, Wand2 } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import { Card, CardContent } from "./ui/card"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import { useState } from "react"

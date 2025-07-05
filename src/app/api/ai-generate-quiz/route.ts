@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import {GoogleGenAI, Type} from "@google/genai"
-import { QuestionModel } from "@/models/question.model";
-import { QuizModel } from "@/models/quiz.model";
-import { UserModel } from "@/models/user.model";
 import { dbConnect } from "@/lib/dbConnect";
 
 const ai = new GoogleGenAI({})
@@ -14,7 +11,6 @@ export async function POST (req:NextRequest){
     const {
       noOfQuestion,
       topicName,
-      createdBy,
     } = data
     let questions
     try {
